@@ -1,0 +1,49 @@
+ .job-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.job-left h3 {
+  margin-bottom: 8px;
+}
+
+.job-info {
+  font-size: 14px;
+  color: #555;
+}
+
+.skills {
+  margin-top: 10px;
+}
+
+.skill {
+  display: inline-block;
+  background-color: #eef3f8;
+  padding: 5px 10px;
+  margin: 4px;
+  border-radius: 15px;
+  font-size: 12px;
+}
+
+.job-right {
+  text-align: right;
+}
+
+.apply-btn {
+  background-color: #0a66c2;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+.posted {
+  font-size: 12px;
+  color: gray;
+} 
+
