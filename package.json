@@ -1,17 +1,16 @@
 {
-  "homepage": "https://akhilkumar0808.github.io/job_finder",
+  "homepage":"https://akhilkumar0808.github.io/job_finder",
   "name": "jobfinder2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build", 
+    "deploy": "gh-pages -d dist",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "start": "json-server --watch db.json --port 3000"
+    "preview": "vite preview"
   },
   "dependencies": {
     "dayjs": "^1.11.19",
