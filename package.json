@@ -1,12 +1,12 @@
 {
-  "homepage":"https://akhilkumar0808.github.io/job_finder",
+  "homepage": "https://Akhilkumar0808.github.io/job_finder",
   "name": "jobfinder2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "predeploy": "npm run build", 
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "build": "vite build",
     "lint": "eslint .",
