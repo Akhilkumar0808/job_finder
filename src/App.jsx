@@ -1,6 +1,6 @@
 
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 
 import Login from "./auth/Login";
 import ProtectedRoute from "./auth/ProtectedRoute";
@@ -13,7 +13,7 @@ import Register from "./pages/Register"
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
     {/* <Navbar/> */}
    <Routes>
     <Route path="/" element={<Header/>}/>
@@ -45,7 +45,7 @@ function App() {
           }
         /> */}
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
