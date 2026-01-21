@@ -9,23 +9,29 @@ import UserHome from "./pages/UserHome";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import Register from "./pages/Register"
+import JobCard from "./components/JobCard";
+import SearchBar from "./components/SearchBar";
+import { initJobs } from "./utils/initjobs";
+import removeOutdatedJobs from "./utils/RemoveOutDatedJobs";
 
 
 function App() {
   return (
     <HashRouter>
-    {/* <Navbar/> */}
+     {/* { <Navbar/> } */}
    <Routes>
-    <Route path="/" element={<Header/>}/>
-        <Route path="/register" element={<Register />} />
+    <Route path ="/" element={<Login/>}/>
+    {/* <Route path="/" element={<Header/>} /> */}
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        
          <Route
           path="/user"
           element={
             <ProtectedRoute>
               <UserHome />
             </ProtectedRoute>
-          }
+          } 
         />
         <Route
           path="/admin"
@@ -44,6 +50,7 @@ function App() {
             </ProtectedRoute>
           }
         /> */}
+     
       </Routes>
     </HashRouter>
   );

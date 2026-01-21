@@ -1,63 +1,36 @@
-import React from "react";
-import "./SerchBar.css";
+import React, { useState } from "react";
+import "./SerchBar.css"
 
-function SearchBar({ filters, setFilters, onSearch }) {
+const SearchBar = ({ jobs, setFilteredJobs }) => {
+  const [keyword, setKeyword] = useState("");
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setKeyword(value);
+
+    const filtered = jobs.filter((job) =>
+      job.title.toLowerCase().includes(value.toLowerCase()) ||
+      job.location.toLowerCase().includes(value.toLowerCase())
+    );
+
+    setFilteredJobs(filtered);
+  };
+
   return (
-    <div className="search-bar">
-      <select
-        value={filters.title}
-        onChange={(e) =>
-          setFilters({ ...filters, title: e.target.value })
-        }
-      >
-        <option value="">Job Role</option>
-        <option>Frontend Developer</option>
-        <option>Backend Developer</option>
-        <option>Data Analytics</option>
-        <option>Software Engineer</option>
-        <option>IT Support</option>
-      </select>
-
-      <select
-        value={filters.type}
-        onChange={(e) =>
-          setFilters({ ...filters, type: e.target.value })
-        }
-      >
-        <option value="">Job Type</option>
-        <option>Full Time</option>
-        <option>Part Time</option>
-        <option>Contract</option>
-      </select>
-
-      <select
-        value={filters.location}
-        onChange={(e) =>
-          setFilters({ ...filters, location: e.target.value })
-        }
-      >
-        <option value="">Location</option>
-        <option>Remote</option>
-        <option>In-Office</option>
-        <option>Hybrid</option>
-      </select>
-
-      <select
-        value={filters.experience}
-        onChange={(e) =>
-          setFilters({ ...filters, experience: e.target.value })
-        }
-      >
-        <option value="">Experience</option>
-        <option>Fresher</option>
-        <option>Junior Level</option>
-        <option>Mid Level</option>
-        <option>Senior Level</option>
-      </select>
-
-      <button onClick={onSearch}>Search</button>
+    <div className="search-container"
+     style={{ padding: "15px", background: "#f4f6f8" }}>
+      <input
+        type="text"
+        className="search-input"
+        placeholder="Search jobs by title or location..."
+        value={keyword}
+        onChange={handleSearch}
+        style={{ width: "100%", padding: "10px" }}
+      />
     </div>
   );
-}
+};
 
 export default SearchBar;
+
+

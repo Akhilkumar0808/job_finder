@@ -1,96 +1,164 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import JobCard from "../components/JobCard";
+import JobData from "../JobDummydata";
 import "./Admin.css"
 
-function AdminDashboard() {
-  const [job, setJob] = useState({
+const AdminDashboard = () => {
+  const navigate = useNavigate(); 
+
+  const [jobs, setJobs] = useState(() => {
+    return JSON.parse(localStorage.getItem("jobs")) || [];
+  });
+
+  const [formData, setFormData] = useState({
     title: "",
     company: "",
-    type: "",
     location: "",
+    skills:"",
+    type: "",
     experience: "",
-    skills: "",
-    job_link: "",
+    joblink:"",
   });
 
   const handleChange = (e) => {
-    setJob({ ...job, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleAddJob = () => {
-    const existingJobs =
-      JSON.parse(localStorage.getItem("jobs")) || [];
+  // const handleAddJob = (e) => {
+  //   e.preventDefault();
 
-    const newJob = {
-      ...job,
-      id: Date.now(),
-      postedOn: new Date().toISOString().split("T")[0],
-      skills: job.skills.split(","),
-    };
+  //   const newJob = {
+  //     id: Date.now(),
+  //     postedOn: new Date().toISOString().split("T")[0],
+  //     ...formData,
+    
 
-    localStorage.setItem(
-      "jobs",
-      JSON.stringify([...existingJobs, newJob])
-    );
+  //   };
 
-    alert("Job added successfully ✅");
+  //   const updatedJobs = [...jobs, newJob];
 
-    setJob({
-      title: "",
-      company: "",
-      type: "",
-      location: "",
-      experience: "",
-      skills: "",
-      job_link: "",
-    });
+  //   setJobs(updatedJobs);
+  //   localStorage.setItem("jobs", JSON.stringify(updatedJobs));
+
+  //   alert("Job added successfully!");
+
+  //   setFormData({
+  //     title: "",
+  //     company: "",
+  //     location: "",
+  //     type: "",
+  //     experience: "",
+  //   });
+  // };
+  const handleAddJob = (e) => {
+  e.preventDefault();
+
+  const newJob = {
+    id: Date.now(),
+    postedOn: new Date().toISOString().split("T")[0],
+    title: formData.title,
+    company: formData.company,
+    location: formData.location,
+    skills:formData.skills,
+    type: formData.type,
+    experience: formData.experience,
+    joblink: formData.joblink,
+    skills: formData.skills
+      ? formData.skills.split(",").map(skill => skill.trim())
+      : []
+  };
+
+  const updatedJobs = [...jobs, newJob];
+
+  setJobs(updatedJobs);
+  localStorage.setItem("jobs", JSON.stringify(updatedJobs));
+
+  alert("Job added successfully!");
+
+  setFormData({
+    title: "",
+    company: "",
+    location: "",
+    skills: "",
+    type: "",
+    experience: "",
+    joblink: ""
+  });
+};
+
+
+  // Logout function
+  const handleLogout = () => {
+  
+    localStorage.removeItem("isAdminLoggedIn"); 
+    navigate("/login"); // redirect to User Login page
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Admin Dashboard - Add Job</h2>
+    <div className="admin-page">
+      <h2 className="admin-title">Admin Dashboard - Add Job</h2>
+      
+      <button className="logout-btn"
+        onClick={handleLogout}
+        > Logout
+      </button>
 
-      <input name="title" placeholder="Job Title" value={job.title} onChange={handleChange} />
-      <input name="company" placeholder="Company" value={job.company} onChange={handleChange} />
+      <form className="job-form" onSubmit={handleAddJob} style={{ marginBottom: "20px" }}>
+        <input
+          name="title"
+          placeholder="Job Title"
+          value={formData.title}
+          onChange={handleChange}
+        />
+        <input
+          name="company"
+          placeholder="Company"
+          value={formData.company}
+          onChange={handleChange}
+        />
+        <input
+          name="location"
+          placeholder="Location"
+          value={formData.location}
+          onChange={handleChange}
+        />
+        <input
+          name="skills"
+          placeholder="Skills (comma separated)"
+          value={formData.skills}
+          onChange={handleChange}
+          />
 
-      <select name="type" value={job.type} onChange={handleChange}>
-        <option value="">Job Type</option>
-        <option>Full Time</option>
-        <option>Part Time</option>
-        <option>Contract</option>
-      </select>
+        <input
+          name="type"
+          placeholder="Job Type"
+          value={formData.type}
+          onChange={handleChange}
+        />
+        <input
+          name="experience"
+          placeholder="Experience"
+          value={formData.experience}
+          onChange={handleChange}
+        />
+        <input
+          name="joblink"
+          placeholder="Job_link"
+          value={formData.joblink}
+          onChange={handleChange}
+        />
+        <button type="submit" className="add-job-btn">Add Job</button>
+      </form>
 
-      <select name="location" value={job.location} onChange={handleChange}>
-        <option value="">Location</option>
-        <option>Remote</option>
-        <option>In-Office</option>
-        <option>Hybrid</option>
-      </select>
-
-      <select name="experience" value={job.experience} onChange={handleChange}>
-        <option value="">Experience</option>
-        <option>Fresher</option>
-        <option>Junior Level</option>
-        <option>Mid Level</option>
-        <option>Senior Level</option>
-      </select>
-
-      <input
-        name="skills"
-        placeholder="Skills (comma separated)"
-        value={job.skills}
-        onChange={handleChange}
-      />
-
-      <input
-        name="job_link"
-        placeholder="Job Apply Link"
-        value={job.job_link}
-        onChange={handleChange}
-      />
-
-      <button onClick={handleAddJob}>Add Job</button>
+      <h3 className="jobs-title">All Jobs</h3>
+      <div className="jobs-grid">
+        {jobs.map((job) => (
+          <JobCard key={job.id} job={job} />
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default AdminDashboard;

@@ -1,47 +1,63 @@
 import React from "react";
-import dayjs from "dayjs";
-import "./JobCard.css";
+import JobData from "../../JobDummydata";
+import "./JobCard.css"
 
-function JobCard({JobData}) {
-
-
-  const today = dayjs();
-  const diffInDays = today.diff(dayjs(JobData.postedOn), "day");
-
+const JobCard = ({ job }) => {
   return (
-    <div className="job-card">
-      
-      {/* LEFT SIDE */}
-      <div className="job-left">
-        <h3>{JobData.title} - {JobData.company}</h3>
-        <p className="job-info">
-          {JobData.type} . {JobData.experience} . {JobData.location}
-        </p>
-
-        <div className="skills">
-          {JobData.skills.map((skill,index) => (
-            <span className="skill" key={index}>
-              {skill}
-            </span>
-          ))}
-        </div>
+    <div className="job-card" style={styles.card}>
+      <div className="job-header">
+      <h2 className="job-title">{job.title}</h2>
+      <span className="job-type">{job.type}</span>
       </div>
 
-      {/* RIGHT SIDE */}
-      <div className="job-right">
-        <p className="posted">
-          Posted {diffInDays} days ago
-        </p>
-        <a href={JobData.job_link}>
+      <p><strong>Company:</strong> {job.company}</p>
+      <p><strong>Location:</strong> {job.location}</p>
+      <p><strong>Type:</strong> {job.type}</p>
+      <p><strong>Experience:</strong> {job.experience}</p>
+      <p><strong>Posted On:</strong> {job.postedOn}</p>
 
-        <button className="apply-btn">Apply</button>
-        </a>
+      <div className="skills-section">
+        <strong>Skills:</strong>
+ <div className="skills-container">
+             {Array.isArray(job.skills) &&  job.skills.length>0?(
+  job.skills.map((skill, index) => (
+    <span className="skill-badge" key={index}>
+      {skill}
+    </span>
+  ))
+   ):( 
+    <span className="no-skills">Not Specified</span>      
+  )}
       </div>
-      
 
+        
+      </div>
+
+      <a
+        href={job.job_link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button style={styles.button}>Apply Now</button>
+      </a>
     </div>
   );
-}
+};
+
+const styles = {
+  card: {
+    border: "1px solid #ccc",
+    padding: "15px",
+    marginBottom: "15px",
+    borderRadius: "6px",
+    backgroundColor: "#fff",
+  },
+  button: {
+    marginTop: "10px",
+    padding: "10px 15px",
+    backgroundColor: "#007bff",
+    color: "#fff",
+  },
+};
 
 export default JobCard;
-

@@ -16,8 +16,7 @@ function Register() {
     }
 
     const userData = { email, password, role };
-
-    // save user in localStorage
+   //Save User login
     localStorage.setItem("jobfinder_user", JSON.stringify(userData));
 
     alert("Registration successful");

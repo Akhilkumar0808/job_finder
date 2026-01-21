@@ -2,7 +2,7 @@
   width: 380px;
   margin: 80px auto;
   padding: 30px;
-  background-color: white;
+  background-color: rgb(79, 47, 219);
   border-radius: 10px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
@@ -10,7 +10,7 @@
 .register-container h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #0a66c2;
+  color: #fafbfc;
 }
 
 .register-container input,
@@ -19,14 +19,14 @@
   padding: 12px;
   margin-bottom: 15px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #3f1ed4;
 }
 
 .register-container button {
   width: 100%;
   padding: 12px;
-  background-color: #0a66c2;
-  color: white;
+  background-color: #f3f705;
+  color: rgb(23, 23, 24);
   font-weight: bold;
   border-radius: 6px;
 }
@@ -37,7 +37,11 @@
 }
 
 .register-container a {
-  color: #0a66c2;
+  color: #26f5ea;
   font-weight: bold;
   text-decoration: none;
+} 
+
+body {
+  background-color: #74f13a; /* light blue */
 }

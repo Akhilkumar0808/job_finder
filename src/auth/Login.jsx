@@ -3,10 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import "./Login.css"
 
 function Login() {
+  const navigate =useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const navigate = useNavigate();
 
   const handleLogin = () => {
     const storedUser = JSON.parse(localStorage.getItem("jobfinder_user"));
@@ -16,7 +15,18 @@ function Login() {
       storedUser.email === email &&
       storedUser.password === password
     ) {
-      localStorage.setItem("isLoggedIn", "true");
+      // localStorage.setItem(
+      //   "isLoggedIn", "true");
+      // localStorage.setItem("role",storedUser.role);
+       localStorage.setItem(
+      "auth",
+      JSON.stringify({
+        isLoggedIn: true,
+        role: storedUser.role,
+        email: storedUser.email,
+      })
+    );
+    
 
       if (storedUser.role === "admin") {
         navigate("/admin");
@@ -26,14 +36,10 @@ function Login() {
     } else {
       alert("Invalid credentials");
     }
+  
   };
-//   localStorage.setItem(
-//   "auth",
-//   JSON.stringify({ role: "admin", loggedIn: true })
-// );
-
-
-  return (
+ 
+   return (
     <div className="login-container">
       <h2>Login</h2>
 
